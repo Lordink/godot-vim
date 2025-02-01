@@ -33,6 +33,7 @@ This is a Godot 4 plugin to emulates VIM-like editor behavior witin Godot editor
     *, #, /, n, N
     aw, a(, a{, a[, a", a'
     iw, i(, i{, i[, i", i'
+    {, }
 
 #### Operator
 
