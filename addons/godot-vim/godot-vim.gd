@@ -155,9 +155,14 @@ var editor_interface : EditorInterface
 var the_ed := EditorAdaptor.new() # The current editor adaptor
 var the_vim := Vim.new()
 var the_dispatcher := CommandDispatcher.new(the_key_map) # The command dispatcher
+var disabled := false
 
 
 func _enter_tree() -> void:
+    if FileAccess.file_exists("res://.novim"):
+        disabled = true
+        return
+    
     editor_interface = get_editor_interface()
     var script_editor = editor_interface.get_script_editor()
     script_editor.editor_script_changed.connect(on_script_changed)
@@ -174,6 +179,9 @@ func _enter_tree() -> void:
 
 
 func _input(event) -> void:
+    if disabled:
+        return
+        
     var key = event as InputEventKey
 
     # Don't process when not a key action
